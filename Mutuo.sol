@@ -27,24 +27,19 @@ contract Mutuo
         multaatraso = percentualMulta;
     }
     
-    function valorDaParcela() public view 
+    function valorDaParcela (uint256 jurosMensais, uint256 valorEmprestimo, uint256 numeroParcelas) public view 
     returns (uint256 valorAtualdaParcela)
-    {
-        valorAtualdaParcela=valor/parcelas*((1+(reajuste/100)));
-        return valorAtualdaParcela;
-    }
-    
-    
-    
-    function reajustaParcela(uint256 jurosMensais) public view
     {
         if (jurosMensais > 10)
         {
             jurosMensais = 10;
         }
-        
+        valorAtualdaParcela=valorEmprestimo/numeroParcelas*((1+(jurosMensais/100)));
+        return valorAtualdaParcela;
     }
-
+    
+    
+    
     
     function aplicaMulta (uint256 mesesAtraso, uint256 valorAtualdaParcela, uint256 percentualMulta) 
     public view
