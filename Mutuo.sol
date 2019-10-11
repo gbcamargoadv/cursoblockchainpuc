@@ -41,7 +41,7 @@ contract Mutuo
     returns (uint256 valorcomMulta)
     {
         
-        require(mesesAtraso<1, "Não há atraso");
+        require(mesesAtraso==0, "Não há atraso");
         for (uint i=1; i<mesesAtraso; i++)
         {
             
