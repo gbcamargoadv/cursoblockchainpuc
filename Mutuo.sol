@@ -37,20 +37,17 @@ contract Mutuo
     }
     
     
-    
-    
-    function aplicaMulta (uint256 mesesAtraso, uint256 valorAtualdaParcela, uint256 percentualMulta) 
+    function aplicaMulta (uint256 mesesAtraso, uint256 percentualMulta, uint256 BasedeCalculo) 
     public view
-    returns (uint256 valorMulta)
+    returns (uint256 valorcomMulta)
     {
-        
-        require (mesesAtraso<1, "Não há atraso nas parcelas");
+        BasedeCalculo=valor;
         
         for (uint i=1; i<mesesAtraso; i++)
         {
             
-            valorMulta = valorAtualdaParcela+((valorAtualdaParcela*percentualMulta)/100);
-            return valorMulta;
+            valorcomMulta = valor+((valor*percentualMulta)/100);
+            return valorcomMulta;
         }
 
     }
