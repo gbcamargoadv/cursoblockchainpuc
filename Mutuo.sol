@@ -23,16 +23,15 @@ contract Mutuo
         
     }
     
-    function valorDaParcela (uint256 juros, uint256 valorEmprestado, uint256 prestacao) public view 
+    function valorDaParcela (uint256 juros) public view 
     returns (uint256 valorAtualdaParcela)
     {
-        valorEmprestado=valor;
-        prestacao=parcelas;
+        
         if (juros > 10)
         {
             juros = 10;
         }
-        valorAtualdaParcela=valorEmprestado/prestacao*((1+(juros/100)));
+        valorAtualdaParcela=valor/parcelas*((1+(juros/100)));
         return valorAtualdaParcela;
     }
     
