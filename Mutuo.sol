@@ -43,7 +43,9 @@ contract Mutuo
     public view
     returns (uint256 valorMulta)
     {
+        
         require (mesesAtraso<1, "Não há atraso nas parcelas");
+        
         for (uint i=1; i<mesesAtraso; i++)
         {
             
