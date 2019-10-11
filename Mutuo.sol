@@ -7,32 +7,27 @@ contract Mutuo
     string public mutuante;
     string public mutuario;
     uint256 private valor;
-    uint256 private reajuste;
     uint256 public parcelas;
-    uint256 public multaatraso;
     
     constructor(
         string memory nomeMutuante,
         string memory nomeMutuario,
         uint256 valorEmprestimo,
-        uint256 jurosMensais,
-        uint256 numeroParcelas,
-        uint256 percentualMulta) public
+        uint256 numeroParcelas)
+         public
     {
         mutuante = nomeMutuante;
         mutuario = nomeMutuario;
         valor = valorEmprestimo;
-        reajuste = jurosMensais;
         parcelas = numeroParcelas;
-        multaatraso = percentualMulta;
+        
     }
     
     function valorDaParcela (uint256 juros, uint256 valorEmprestado, uint256 prestacao) public view 
     returns (uint256 valorAtualdaParcela)
     {
-        juros=jurosMensais;
-        valorEmprestado=valorEmprestimo;
-        prestacao=numeroParcelas;
+        valorEmprestado=valor;
+        prestacao=parcelas;
         if (juros > 10)
         {
             juros = 10;
