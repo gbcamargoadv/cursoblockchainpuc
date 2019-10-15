@@ -1,6 +1,5 @@
 pragma solidity 0.5.12;
 
-
 contract Mutuo
 {
 
@@ -8,31 +7,51 @@ contract Mutuo
     string public mutuario;
     uint256 private valor;
     uint256 public parcelas;
+    uint256 juros;
+    uint256 multa;
     
     constructor(
         string memory nomeMutuante,
         string memory nomeMutuario,
         uint256 valorEmprestimo,
-        uint256 numeroParcelas)
+        uint256 numeroParcelas,
+        uint256 jurosMensais,
+        uint256 multaMensal)
          public
     {
         mutuante = nomeMutuante;
         mutuario = nomeMutuario;
         valor = valorEmprestimo;
         parcelas = numeroParcelas;
-        
+        juros = jurosMensais;
+        multa = multaMensal;
     }
     
-    function valorDaParcela (uint256 juros) public view 
-    returns (uint256 valorAtualdaParcela)
-    {
+
+    function jurosAcumulados () public view 
+    returns (uint256 jurosTotais)
+    
+    {    
+        for(i=0; i<parcelas; i++) {
         
-        if (juros > 10)
-        {
-            juros = 10;
+        
+        jurosTotais = (valor*(juros)/100);
+        return jurosTotais;
         }
-        valorAtualdaParcela=(valor/parcelas+((valor/parcelas*juros)/100));
-        return valorAtualdaParcela;
+    }   
+    
+    function valorAtualdaParcela () public view
+    returns (uint256 valorParcela)
+    {
+        valorParcela=(valor+juros)/parcelas;
+        return valorParcela;
+    }
+        
+    function saldoDevedor (uint256 parcelasPagas) public view
+    returns (uint256 saldoDevedorAtualizado)
+    {
+        saldoDevedorAtualizado = valor + jurosTotais - (parcelasPagas*valorParcela);
+        return saldoDevedorAtualizado;
     }
     
     
