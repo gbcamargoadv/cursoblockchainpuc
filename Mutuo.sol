@@ -31,7 +31,7 @@ contract Mutuo
         {
             juros = 10;
         }
-        valorAtualdaParcela=valor/parcelas*((1+(juros/100)));
+        valorAtualdaParcela=(valor/parcelas+((valor/parcelas*juros)/100));
         return valorAtualdaParcela;
     }
     
@@ -41,11 +41,11 @@ contract Mutuo
     returns (uint256 valorcomMulta)
     {
         
-        require(mesesAtraso==0, "Não há atraso");
-        for (uint i=1; i<mesesAtraso; i++)
+        require(mesesAtraso>1, "Não há atraso");
+        for(uint i=1; i<=mesesAtraso; i++)
+        
         {
-            
-            valorcomMulta = valor+((valor*percentualMulta)/100);
+            valorcomMulta = (valor/parcelas)+((valor/parcelas*percentualMulta)/100);
             return valorcomMulta;
         }
 
