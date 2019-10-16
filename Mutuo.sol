@@ -30,14 +30,11 @@ contract Mutuo
 
     function jurosAcumulados () public view 
     returns (uint256 jurosTotais)
-    
     {    
-        for(i=0; i<parcelas; i++) {
-        
-        
-        jurosTotais = (valor*(juros)/100);
-        return jurosTotais;
+        for(uint256 i=0; i<parcelas; i++) {
+            jurosTotais = (valor*(juros)/100);
         }
+        return jurosTotais;
     }   
     
     function valorAtualdaParcela () public view
@@ -50,7 +47,7 @@ contract Mutuo
     function saldoDevedor (uint256 parcelasPagas) public view
     returns (uint256 saldoDevedorAtualizado)
     {
-        saldoDevedorAtualizado = valor + jurosTotais - (parcelasPagas*valorParcela);
+        saldoDevedorAtualizado = (valor + jurosAcumulados()) - (parcelasPagas*valorAtualdaParcela());
         return saldoDevedorAtualizado;
     }
     
@@ -61,8 +58,7 @@ contract Mutuo
     {
         
         require(mesesAtraso>1, "Não há atraso");
-        for(uint i=1; i<=mesesAtraso; i++)
-        
+        for(uint256 i=0; i<mesesAtraso; i++) 
         {
             valorcomMulta = (valor/parcelas)+((valor/parcelas*percentualMulta)/100);
             return valorcomMulta;
